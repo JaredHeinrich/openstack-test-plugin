@@ -5,24 +5,8 @@ function configure_plugin {
 }
 
 if is_service_enabled openstack-test; then
-    if [[ "$1" == "stack" && "$2" == "pre-install"  ]]; then
-        :
-
-    elif [[ "$1" == "stack" && "$2" == "install"  ]]; then
-
-    elif [[ "$1" == "stack" && "$2" == "post-config"  ]]; then
+    if [[ "$1" == "stack" && "$2" == "post-config"  ]]; then
         echo_summary "Configurng MyPlugin"
         configure_plugin
-
-    elif [[ "$1" == "stack" && "$2" == "extra"  ]]; then
-        :
-    fi
-
-    if [[ "$1" == "unstack"  ]]; then
-        :
-    fi
-
-    if [[ "$1" == "clean"  ]]; then
-        :
     fi
 fi
