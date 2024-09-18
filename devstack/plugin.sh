@@ -6,9 +6,7 @@ function install_my_horizon_plugin {
 
 function configure_my_horizon_plugin {
     echo "Configuring My Horizon Plugin..."
-
-    # Copy the Horizon panel files to the Horizon directory
-    cp -r $DEST/my_horizon_plugin/my_horizon_plugin $DEST/horizon/openstack_dashboard/dashboards/
+    cp -a $DEST/openstack-test-plugin/openstack-test-plugin/enabled/* ${DEST}/horizon/openstack_dashboard/local/enabled/
 }
 
 function init_my_horizon_plugin {
