@@ -1,5 +1,4 @@
 PLUGIN_DIR=$(cd $(dirname $BASH_SOURCE)/.. && pwd)
-PYTHON=${PYTHON:-python}
 
 function configure_plugin {
     cp -a ${PLUGIN_DIR}/openstack-test-plugin/enabled/* ${DEST}/horizon/openstack_dashboard/local/enabled/
