@@ -1,29 +1,29 @@
-#!/bin/bash
-function install_my_horizon_plugin {
-    echo "Installing My Horizon Plugin..."
-    # Install necessary dependencies here (if any)
+PLUGIN_DIR=$(cd $(dirname $BASH_SOURCE)/.. && pwd)
+PYTHON=${PYTHON:-python}
+
+function configure_plugin {
+    cp -a ${PLUGIN_DIR}/openstack-test-plugin/enabled/* ${DEST}/horizon/openstack_dashboard/local/enabled/
 }
 
-function configure_my_horizon_plugin {
-    echo "Configuring My Horizon Plugin..."
-    cp -a $DEST/openstack-test-plugin/openstack-test-plugin/enabled/* ${DEST}/horizon/openstack_dashboard/local/enabled/
-}
+if is_service_enabled openstack-test; then
+    if [[ "$1" == "stack" && "$2" == "pre-install"  ]]; then
+        :
 
-function init_my_horizon_plugin {
-    echo "Initializing My Horizon Plugin..."
-    # Initialize plugin if needed
-}
+    elif [[ "$1" == "stack" && "$2" == "install"  ]]; then
 
-function start_my_horizon_plugin {
-    echo "Starting My Horizon Plugin..."
-    # Restart Horizon to apply the changes
-    sudo systemctl restart apache2
-}
+    elif [[ "$1" == "stack" && "$2" == "post-config"  ]]; then
+        echo_summary "Configurng MyPlugin"
+        configure_plugin
 
-# DevStack plugin integration
-if is_service_enabled horizon; then
-    install_my_horizon_plugin
-    configure_my_horizon_plugin
-    init_my_horizon_plugin
-    start_my_horizon_plugin
+    elif [[ "$1" == "stack" && "$2" == "extra"  ]]; then
+        :
+    fi
+
+    if [[ "$1" == "unstack"  ]]; then
+        :
+    fi
+
+    if [[ "$1" == "clean"  ]]; then
+        :
+    fi
 fi
